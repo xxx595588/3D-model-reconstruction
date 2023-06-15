@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pickle
 import cv2
 from camutils import *
-import meshutils
+from meshutils import *
 
 # load in the intrinsic camera parameters from 'calibration.pickle'
 file = open("calibration.pickle", "rb")
@@ -20,11 +20,11 @@ camR = Camera(f, c, R, t)
 
 # load in the left and right images and find the coordinates of
 # the chessboard corners using OpenCV
-imgL = plt.imread('calib_jpg_u/frame_C0_02.jpg')
+imgL = plt.imread('calib_jpg_u/frame_C0_01.jpg')
 ret, cornersL = cv2.findChessboardCorners(imgL, (8,6), None)
 pts2L = cornersL.squeeze().T
 
-imgR = plt.imread('calib_jpg_u/frame_C1_02.jpg')
+imgR = plt.imread('calib_jpg_u/frame_C1_01.jpg')
 ret, cornersR = cv2.findChessboardCorners(imgR, (8,6), None)
 pts2R = cornersR.squeeze().T
 
@@ -58,51 +58,52 @@ print("Processing grab0")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_0_u/color_C0_', obj_name+'/grab_0_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_0_u/frame_C0_', obj_name+'/grab_0_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,color_value=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,color_value,tri,'grab0.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab0.ply')
 
 
 print("Processing grab1")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_1_u/color_C0_', obj_name+'/grab_1_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_1_u/frame_C0_', obj_name+'/grab_1_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab1.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab1.ply')
 
 print("Processing grab2")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_2_u/color_C0_', obj_name+'/grab_2_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_2_u/frame_C0_', obj_name+'/grab_2_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab2.ply')
+pts3,tri,color_value=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab2.ply')
 
 
 print("Processing grab3")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_3_u/color_C0_', obj_name+'/grab_3_u/color_C1_'
 imprefixL,imprefixR  = obj_name+'/grab_3_u/frame_C0_', obj_name+'/grab_3_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab3.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab3.ply')
 
 
 print("Processing grab4")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_4_u/color_C0_', obj_name+'/grab_4_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_4_u/frame_C0_', obj_name+'/grab_4_u/frame_C1_'
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab4.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab4.ply')
 
 
 print("Processing grab5")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_5_u/color_C0_', obj_name+'/grab_5_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_5_u/frame_C0_', obj_name+'/grab_5_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab5.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab5.ply')
+
 
 print("Processing grab6")
 imprefixL_obj, imprefixR_obj = obj_name+'/grab_6_u/color_C0_', obj_name+'/grab_6_u/color_C1_'
 imprefixL, imprefixR = obj_name+'/grab_6_u/frame_C0_', obj_name+'/grab_6_u/frame_C1_' 
 pts2L,pts2R,pts3,color_value = reconstruct(imprefixL,imprefixR,threshold,imprefixL_obj,imprefixR_obj,threshold_obj,camL,camR)
-pts3,tri,bvalues=mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
-meshutils.writeply(pts3,bvalues,tri,'grab6.ply')
+pts3,tri,color_value = mesh(pts2L,pts2R,pts3,boxlimit,step,color_value,trithresh)
+writeply(pts3,color_value,tri,'grab6.ply')
